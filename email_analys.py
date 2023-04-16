@@ -8,7 +8,6 @@ openai.api_key = ''
 
 folder_path = '' # Change this to the path of the folder containing the eml files
 
-#question1 = str(input("What are you looking for? "))
 
 all_responses_file = 'all_responses.txt'
 
@@ -34,9 +33,10 @@ for root, dirs, files in os.walk(folder_path):
                 # Print the body text
                 if body_text is not None:
                     email_body = body_text.decode('utf-8')
+                    
+                    # prompt = "Analysera följande email som en it-forensisk utredare och tänk på att du utreder brottet bedrägeri: " + email_body
 
-                    #prompt = "In your answer start with Yes or no and follow with an explanation. Do the following text include something about " + question1 + "?: " + email_body
-                    prompt = "Analyze the following email: " + email_body
+                    prompt = "Analysera följande email som en it-forensisk utredare: " + email_body
                     #print(prompt)
                     # Generate text with GPT-3
                     response = openai.Completion.create(
