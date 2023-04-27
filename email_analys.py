@@ -9,7 +9,17 @@ openai.api_key = ''
 folder_path = '' # Change this to the path of the folder containing the eml files
 
 
+
+yes_file = 'yes_responses.txt'
+no_file = 'no_responses.txt'
 all_responses_file = 'all_responses.txt'
+
+# Clear the contents of the text files
+open(yes_file, 'w').close()
+open(no_file, 'w').close()
+open(all_responses_file, 'w').close()
+
+
 
 for root, dirs, files in os.walk(folder_path):
     for filename in files:
@@ -33,11 +43,9 @@ for root, dirs, files in os.walk(folder_path):
                 # Print the body text
                 if body_text is not None:
                     email_body = body_text.decode('utf-8')
-                    
-                    # prompt = "Analysera följande email som en it-forensisk utredare och tänk på att du utreder brottet bedrägeri: " + email_body
 
-                    prompt = "Analysera följande email som en it-forensisk utredare: " + email_body
-                    #print(prompt)
+                    prompt = "Act as an IT forensics investigator, do the following email contain suspect content regarding criminal activity? " + email_body
+
                     # Generate text with GPT-3
                     response = openai.Completion.create(
                         engine="text-davinci-003",
@@ -54,3 +62,10 @@ for root, dirs, files in os.walk(folder_path):
 
                     with open(all_responses_file, 'a') as all_f:
                         all_f.write(f"File: {os.path.join(root, filename)}\n{response_text}\n\n")
+
+                    if response_text.lower().startswith("yes"):
+                        with open(yes_file, 'a') as yes_f:
+                            yes_f.write(f"File: {os.path.join(root, filename)}\n{response_text}\n\n")
+                    elif response_text.lower().startswith("no"):
+                        with open(no_file, 'a') as no_f:
+                            no_f.write(f"File: {os.path.join(root, filename)}\n{response_text}\n\n")
