@@ -1,0 +1,761 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     29966,        753]
+NotebookOptionsPosition[     28591,        721]
+NotebookOutlinePosition[     29009,        738]
+CellTagsIndexPosition[     28966,        735]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.8927788030436153`*^9},ExpressionUUID->"12f1306f-387f-4ef2-9d47-\
+36d69c2f4d80"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fileNames", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<986.eml\>\"", ",", "\"\<11..eml\>\"", ",", "\"\<1809.eml\>\"", ",", 
+     "\"\<1011.eml\>\"", ",", "\"\<1104.eml\>\"", ",", "\"\<251..eml\>\"", 
+     ",", "\"\<9..eml\>\"", ",", "\"\<144.eml\>\"", ",", "\"\<969.eml\>\"", 
+     ",", "\"\<10..eml\>\"", ",", "\"\<828.eml\>\"", ",", "\"\<980.eml\>\"", 
+     ",", "\"\<998.eml\>\"", ",", "\"\<891.eml\>\"", ",", "\"\<906.eml\>\"", 
+     ",", "\"\<6..eml\>\"", ",", "\"\<7..eml\>\"", ",", "\"\<525.eml\>\"", 
+     ",", "\"\<8..eml\>\"", ",", "\"\<1..eml\>\"", ",", "\"\<115..eml\>\"", 
+     ",", "\"\<981.eml\>\"", ",", "\"\<1018.eml\>\"", ",", "\"\<24..eml\>\"", 
+     ",", "\"\<957.eml\>\"", ",", "\"\<985.eml\>\"", ",", "\"\<1101.eml\>\"", 
+     ",", "\"\<139.eml\>\"", ",", "\"\<267..eml\>\"", ",", "\"\<72..eml\>\"", 
+     ",", "\"\<895.eml\>\"", ",", "\"\<3..eml\>\"", ",", "\"\<1019.eml\>\"", 
+     ",", "\"\<1017.eml\>\"", ",", "\"\<5..eml\>\"", ",", "\"\<907.eml\>\"", 
+     ",", "\"\<965.eml\>\"", ",", "\"\<20..eml\>\"", ",", "\"\<547.eml\>\"", 
+     ",", "\"\<29..eml\>\"", ",", "\"\<1004.eml\>\"", ",", "\"\<949.eml\>\"", 
+     ",", "\"\<93..eml\>\"", ",", "\"\<114..eml\>\"", ",", "\"\<2..eml\>\"", 
+     ",", "\"\<4..eml\>\"", ",", "\"\<106.eml\>\"", ",", "\"\<1.eml\>\"", 
+     ",", "\"\<187.eml\>\"", ",", "\"\<46.eml\>\""}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"suspect", "=", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<9_gpt4.eml\>\"", ",", "\"\<10_gpt4.eml\>\"", ",", 
+      "\"\<6_gpt4.eml\>\"", ",", "\"\<7_gpt4.eml\>\"", ",", 
+      "\"\<8_gpt4.eml\>\"", ",", "\"\<3_gpt4.eml\>\"", ",", 
+      "\"\<5_gpt4.eml\>\"", ",", "\"\<547.eml\>\"", ",", "\"\<2_gpt4.eml\>\"",
+       ",", "\"\<4_gpt4.eml\>\"", ",", "\"\<106.eml\>\""}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nonsuspect", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<986.eml\>\"", ",", "\"\<11.eml\>\"", ",", "\"\<1809.eml\>\"", ",", 
+     "\"\<1011.eml\>\"", ",", "\"\<1104.eml\>\"", ",", "\"\<251.eml\>\"", 
+     ",", "\"\<144.eml\>\"", ",", "\"\<969.eml\>\"", ",", "\"\<10.eml\>\"", 
+     ",", "\"\<828.eml\>\"", ",", "\"\<980.eml\>\"", ",", "\"\<998.eml\>\"", 
+     ",", "\"\<891.eml\>\"", ",", "\"\<906.eml\>\"", ",", "\"\<525.eml\>\"", 
+     ",", "\"\<1.eml\>\"", ",", "\"\<115.eml\>\"", ",", "\"\<981.eml\>\"", 
+     ",", "\"\<1018.eml\>\"", ",", "\"\<24.eml\>\"", ",", "\"\<957.eml\>\"", 
+     ",", "\"\<985.eml\>\"", ",", "\"\<1101.eml\>\"", ",", "\"\<139.eml\>\"", 
+     ",", "\"\<267.eml\>\"", ",", "\"\<72.eml\>\"", ",", "\"\<895.eml\>\"", 
+     ",", "\"\<1019.eml\>\"", ",", "\"\<1017.eml\>\"", ",", "\"\<907.eml\>\"",
+      ",", "\"\<965.eml\>\"", ",", "\"\<20.eml\>\"", ",", "\"\<29.eml\>\"", 
+     ",", "\"\<1004.eml\>\"", ",", "\"\<949.eml\>\"", ",", "\"\<93.eml\>\"", 
+     ",", "\"\<114.eml\>\"", ",", "\"\<1_gpt4.eml\>\"", ",", 
+     "\"\<187.eml\>\"", ",", "\"\<46.eml\>\""}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<986.eml\>\"", ",", "\"\<11.eml\>\"", ",", "\"\<2_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r1", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<1809.eml\>\"", ",", "\"\<1011.eml\>\"", ",", "\"\<3_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<251.eml\>\"", ",", "\"\<144.eml\>\"", ",", "\"\<4_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r3", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<969.eml\>\"", ",", "\"\<10.eml\>\"", ",", "\"\<5_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r4", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<980.eml\>\"", ",", "\"\<998.eml\>\"", ",", "\"\<6_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r5", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<891.eml\>\"", ",", "\"\<906.eml\>\"", ",", "\"\<7_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r6", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<525.eml\>\"", ",", "\"\<1.eml\>\"", ",", "\"\<8_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r7", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<115.eml\>\"", ",", "\"\<981.eml\>\"", ",", "\"\<9_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r8", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<1018.eml\>\"", ",", "\"\<24.eml\>\"", ",", "\"\<10_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r9", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<957.eml\>\"", ",", "\"\<1101.eml\>\"", ",", "\"\<547.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r10", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<139.eml\>\"", ",", "\"\<267.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r11", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<1104.eml\>\"", ",", "\"\<828.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r12", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<985.eml\>\"", ",", "\"\<72.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r13", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<895.eml\>\"", ",", "\"\<1019.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r14", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<1017.eml\>\"", ",", "\"\<907.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r15", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<965.eml\>\"", ",", "\"\<20.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r16", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<949.eml\>\"", ",", "\"\<93.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r17", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<114.eml\>\"", ",", "\"\<1_gpt4.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r18", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<187.eml\>\"", ",", "\"\<46.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r19", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<106.eml\>\"", ",", "\"\<29.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<GPT-3 kategorisering\>\"", ",", " ", "SpanFromLeft"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Icke-suspekt inneh\[ARing]ll\>\"", ",", "SpanFromLeft", ",", 
+       "\"\<Suspekt inneh\[ARing]ll\>\""}], "}"}], ",", " ", 
+     "\[IndentingNewLine]", "r0", ",", "r1", ",", "r2", ",", "r3", ",", "r4", 
+     ",", "r5", ",", "r6", ",", "r7", ",", "r8", ",", "r9", ",", "r10", ",", 
+     "r11", ",", "r12", ",", "r13", ",", "r14", ",", "r15", ",", "r16", ",", 
+     "r17", ",", "r18", ",", "r19", " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<N=50\>\"", ",", " ", "SpanFromLeft"}], "}"}]}], "}"}], ",",
+    " ", 
+   RowBox[{"Frame", "->", " ", "All"}]}], "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBmIQzZPtEj/z3xvHS5/UpoLoZUtDZoHoqmMi80D0taNZ
+K0D06qpDq0C0yw/ZLSCaVbzwNYg2ijjxAUT/cb0Iph9fDv4Gou+q5PwE0TEp
+i/+BaMMHR1hmAel78mxcIDqHW1UURE9xniUJovt8TVRB9FUVZW0Q3SHyCEw/
+2yzkCKIztRldQHSA1Wb7eUDaRDPICUSHXNPxBNEet9/5g2i97Vuz5gPpTQ31
+uSD6tppHC4hef2gHmC6fpCWyAEhz2LhJgeglpqw6IPpAbK8piD5j+nX/YiAt
+euwHmH6V+usoiO7YL3EMRAMAUeizQw==
+  "],
+ CellLabel->"In[46]:=",ExpressionUUID->"9838887b-4f61-4a15-85eb-4f4141f67f76"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"GPT-3 kategorisering\"\>", "\[SpanFromLeft]", "\[SpanFromLeft]"},
+    {"\<\"Icke-suspekt inneh\[ARing]ll\"\>", 
+     "\[SpanFromLeft]", "\<\"Suspekt inneh\[ARing]ll\"\>"},
+    {"\<\"986.eml\"\>", "\<\"11.eml\"\>", "\<\"2_gpt4.eml\"\>"},
+    {"\<\"1809.eml\"\>", "\<\"1011.eml\"\>", "\<\"3_gpt4.eml\"\>"},
+    {"\<\"251.eml\"\>", "\<\"144.eml\"\>", "\<\"4_gpt4.eml\"\>"},
+    {"\<\"969.eml\"\>", "\<\"10.eml\"\>", "\<\"5_gpt4.eml\"\>"},
+    {"\<\"980.eml\"\>", "\<\"998.eml\"\>", "\<\"6_gpt4.eml\"\>"},
+    {"\<\"891.eml\"\>", "\<\"906.eml\"\>", "\<\"7_gpt4.eml\"\>"},
+    {"\<\"525.eml\"\>", "\<\"1.eml\"\>", "\<\"8_gpt4.eml\"\>"},
+    {"\<\"115.eml\"\>", "\<\"981.eml\"\>", "\<\"9_gpt4.eml\"\>"},
+    {"\<\"1018.eml\"\>", "\<\"24.eml\"\>", "\<\"10_gpt4.eml\"\>"},
+    {"\<\"957.eml\"\>", "\<\"1101.eml\"\>", "\<\"547.eml\"\>"},
+    {"\<\"139.eml\"\>", "\<\"267.eml\"\>", "\<\" \"\>"},
+    {"\<\"1104.eml\"\>", "\<\"828.eml\"\>", "\<\" \"\>"},
+    {"\<\"985.eml\"\>", "\<\"72.eml\"\>", "\<\" \"\>"},
+    {"\<\"895.eml\"\>", "\<\"1019.eml\"\>", "\<\" \"\>"},
+    {"\<\"1017.eml\"\>", "\<\"907.eml\"\>", "\<\" \"\>"},
+    {"\<\"965.eml\"\>", "\<\"20.eml\"\>", "\<\" \"\>"},
+    {"\<\"949.eml\"\>", "\<\"93.eml\"\>", "\<\" \"\>"},
+    {"\<\"114.eml\"\>", "\<\"1_gpt4.eml\"\>", "\<\" \"\>"},
+    {"\<\"187.eml\"\>", "\<\"46.eml\"\>", "\<\" \"\>"},
+    {"\<\"106.eml\"\>", "\<\"29.eml\"\>", "\<\" \"\>"},
+    {"\<\"N=50\"\>", "\[SpanFromLeft]", "\[SpanFromLeft]"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.891593397835288*^9, 3.8915934285820913`*^9}, 
+   3.8915936498680153`*^9, 3.891600938546707*^9, 3.891600980716301*^9},
+ CellLabel->"Out[69]=",ExpressionUUID->"6b05c02c-f7ab-4d3b-a4ca-2702a7b67870"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"r0", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<986.eml\>\"", ",", "\"\<11.eml\>\"", ",", "\"\<1_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r1", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<1809.eml\>\"", ",", "\"\<1011.eml\>\"", ",", "\"\<2_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<251.eml\>\"", ",", "\"\<144.eml\>\"", ",", "\"\<3_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r3", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<969.eml\>\"", ",", "\"\<10.eml\>\"", ",", "\"\<4_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r4", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<980.eml\>\"", ",", "\"\<998.eml\>\"", ",", "\"\<5_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r5", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<891.eml\>\"", ",", "\"\<906.eml\>\"", ",", "\"\<6_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r6", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<525.eml\>\"", ",", "\"\<1.eml\>\"", ",", "\"\<7_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r7", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<115.eml\>\"", ",", "\"\<981.eml\>\"", ",", "\"\<8_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r8", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<1018.eml\>\"", ",", "\"\<24.eml\>\"", ",", "\"\<9_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r9", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<957.eml\>\"", ",", "\"\<1101.eml\>\"", ",", "\"\<10_gpt4.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r10", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<139.eml\>\"", ",", "\"\<267.eml\>\"", ",", "\"\<547.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r11", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<1104.eml\>\"", ",", "\"\<828.eml\>\"", ",", "\"\<1017.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r12", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<985.eml\>\"", ",", "\"\<72.eml\>\"", ",", "\"\<1019.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r13", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<895.eml\>\"", ",", "\"\<907.eml\>\"", ",", "\"\<949.eml\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r14", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<965.eml\>\"", ",", "\"\<20.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r15", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<114.eml\>\"", ",", "\"\<93.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r16", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<187.eml\>\"", ",", "\"\<46.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r16", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<29.eml\>\"", ",", "\"\<106.eml\>\"", ",", "\"\< \>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<F\[ODoubleDot]rfattarnas kategorisering\>\"", ",", " ", 
+       "SpanFromLeft"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Icke-suspekt inneh\[ARing]ll\>\"", ",", "SpanFromLeft", ",", 
+       "\"\<Suspekt inneh\[ARing]ll\>\""}], "}"}], ",", " ", 
+     "\[IndentingNewLine]", "r0", ",", "r1", ",", "r2", ",", "r3", ",", "r4", 
+     ",", "r5", ",", "r6", ",", "r7", ",", "r8", ",", "r9", ",", "r10", ",", 
+     "r11", ",", "r12", ",", "r13", ",", "r14", ",", "r15", ",", "r16", ",", 
+     " ", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<N=50\>\"", ",", " ", "SpanFromLeft"}], "}"}]}], "}"}], ",",
+    " ", 
+   RowBox[{"Frame", "->", " ", "All"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8915900409486217`*^9, 3.891590052380088*^9}, {
+  3.891592265217613*^9, 3.891592294994479*^9}, {3.891592436544586*^9, 
+  3.891592513238669*^9}, {3.8915925819248877`*^9, 3.891592655577889*^9}, {
+  3.8915927132657833`*^9, 3.891592755066135*^9}, {3.891600653435461*^9, 
+  3.891600656227322*^9}, {3.891600758881214*^9, 3.891600759768766*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"c8989340-c021-4155-b3cb-3d0b9d5fb51e"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"F\[ODoubleDot]rfattarnas kategorisering\"\>", "\[SpanFromLeft]", 
+     "\[SpanFromLeft]"},
+    {"\<\"Icke-suspekt inneh\[ARing]ll\"\>", 
+     "\[SpanFromLeft]", "\<\"Suspekt inneh\[ARing]ll\"\>"},
+    {"\<\"986.eml\"\>", "\<\"11.eml\"\>", "\<\"1_gpt4.eml\"\>"},
+    {"\<\"1809.eml\"\>", "\<\"1011.eml\"\>", "\<\"2_gpt4.eml\"\>"},
+    {"\<\"251.eml\"\>", "\<\"144.eml\"\>", "\<\"3_gpt4.eml\"\>"},
+    {"\<\"969.eml\"\>", "\<\"10.eml\"\>", "\<\"4_gpt4.eml\"\>"},
+    {"\<\"980.eml\"\>", "\<\"998.eml\"\>", "\<\"5_gpt4.eml\"\>"},
+    {"\<\"891.eml\"\>", "\<\"906.eml\"\>", "\<\"6_gpt4.eml\"\>"},
+    {"\<\"525.eml\"\>", "\<\"1.eml\"\>", "\<\"7_gpt4.eml\"\>"},
+    {"\<\"115.eml\"\>", "\<\"981.eml\"\>", "\<\"8_gpt4.eml\"\>"},
+    {"\<\"1018.eml\"\>", "\<\"24.eml\"\>", "\<\"9_gpt4.eml\"\>"},
+    {"\<\"957.eml\"\>", "\<\"1101.eml\"\>", "\<\"10_gpt4.eml\"\>"},
+    {"\<\"139.eml\"\>", "\<\"267.eml\"\>", "\<\"547.eml\"\>"},
+    {"\<\"1104.eml\"\>", "\<\"828.eml\"\>", "\<\"1017.eml\"\>"},
+    {"\<\"985.eml\"\>", "\<\"72.eml\"\>", "\<\"1019.eml\"\>"},
+    {"\<\"895.eml\"\>", "\<\"907.eml\"\>", "\<\"949.eml\"\>"},
+    {"\<\"965.eml\"\>", "\<\"20.eml\"\>", "\<\" \"\>"},
+    {"\<\"114.eml\"\>", "\<\"93.eml\"\>", "\<\" \"\>"},
+    {"\<\"29.eml\"\>", "\<\"106.eml\"\>", "\<\" \"\>"},
+    {"\<\"N=50\"\>", "\[SpanFromLeft]", "\[SpanFromLeft]"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.891592795014076*^9, 3.891600963946528*^9},
+ CellLabel->"Out[45]=",ExpressionUUID->"3808f7ec-ac5e-4a17-9f53-526ca4d1320b"]
+}, Open  ]],
+
+Cell[BoxData[{"\"\<Flask-positiv='Hi Jenny! How has your day been?', 'Yes, \
+this email message is suspect because...'\>\"", "\[IndentingNewLine]", 
+ RowBox[{"\"\<A.k.a. False positiv\>\"", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", "\"\<Falsk-negativ='I've \
+put the package down at the agreed upon \
+location','\!\(\*StyleBox[\"No\",FontWeight->\"Plain\"]\), this email message \
+is suspect because...'\>\"", "\[IndentingNewLine]", 
+ RowBox[{"\"\<A.k.a. False negativ\>\"", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", "\"\<Sann-positiv='I've put \
+the package down at the agreed upon location', 'Yes, this email message is \
+suspect because...'\>\"", "\[IndentingNewLine]", 
+ RowBox[{"\"\<A.k.a. True positiv\>\"", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", "\"\<Sann-negativ='Hi, \
+Jenny! How has your day been?','No, this email message is suspect because...'\
+\>\"", "\[IndentingNewLine]", 
+ RowBox[{"\"\<A.k.a. True negativ\>\"", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.892778818400729*^9, 3.892778880250136*^9}, {
+  3.892778922601609*^9, 3.892778924490237*^9}, {3.8927789786911507`*^9, 
+  3.892779097857709*^9}, {3.8927792470390463`*^9, 3.892779268577552*^9}, {
+  3.892779303349606*^9, 3.892779399878326*^9}, {3.8927794999901342`*^9, 
+  3.892779594122341*^9}, {3.8929591010760736`*^9, 
+  3.8929591076436033`*^9}},ExpressionUUID->"57f2662b-b296-411d-b084-\
+7406cf3c960b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"tableData", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<\>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<\>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<Faktisk kategori\>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        "SpanFromLeft"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<\>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<\>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "False"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<Suspekt mejl    \>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", "SpanFromLeft",
+         ",", 
+        RowBox[{"Item", "[", 
+         RowBox[{"\"\<Icke-suspekt mejl\>\"", ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        "SpanFromLeft"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Item", "[", 
+         RowBox[{
+          RowBox[{"Rotate", "[", 
+           RowBox[{"\"\<kategori   \>\"", ",", 
+            RowBox[{"90", " ", "Degree"}]}], "]"}], ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "True"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+        
+        RowBox[{"Item", "[", 
+         RowBox[{
+          RowBox[{"InsertLinebreaks", "[", 
+           RowBox[{"\"\<Suspekt mejl\>\"", ",", "10"}], "]"}], ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "True"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        "\"\<Sann-positiv\>\"", ",", "SpanFromLeft", ",", 
+        "\"\<Falsk-positiv\>\"", ",", "SpanFromLeft"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Item", "[", 
+         RowBox[{
+          RowBox[{"Rotate", "[", 
+           RowBox[{"\"\<F\[ODoubleDot]rutsp\[ARing]dd\>\"", ",", 
+            RowBox[{"90", " ", "Degree"}]}], "]"}], ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"True", ",", "False"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+        
+        RowBox[{"Item", "[", 
+         RowBox[{
+          RowBox[{"InsertLinebreaks", "[", 
+           RowBox[{"\"\<Icke-suspekt mejl\>\"", ",", "12"}], "]"}], ",", 
+          RowBox[{"Frame", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"True", ",", "True"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"FrameStyle", "->", "Thick"}]}], "]"}], ",", 
+        "\"\<Falsk-negativ\>\"", ",", "SpanFromLeft", ",", 
+        "\"\<Sann-negativ\>\"", ",", "SpanFromLeft"}], "}"}]}], "}"}]}], 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"combinedTable", "=", 
+  RowBox[{"Grid", "[", 
+   RowBox[{"tableData", ",", 
+    RowBox[{"Dividers", "->", "All"}], ",", 
+    RowBox[{"FrameStyle", "->", 
+     RowBox[{"Directive", "[", 
+      RowBox[{"Thick", ",", "Black"}], "]"}]}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.892942124411129*^9, 3.8929421865169773`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"38b77527-1073-408e-8a26-d50964188f28"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     ItemBox["\<\"\"\>",
+      Frame->{{False, False}, {False, False}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], 
+     ItemBox["\<\"\"\>",
+      Frame->{{False, False}, {False, False}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], 
+     ItemBox["\<\"Faktisk kategori\"\>",
+      Frame->{{True, True}, {True, True}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], "\[SpanFromLeft]", "\[SpanFromLeft]", 
+     "\[SpanFromLeft]"},
+    {
+     ItemBox["\<\"\"\>",
+      Frame->{{False, False}, {False, False}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], 
+     ItemBox["\<\"\"\>",
+      Frame->{{False, False}, {False, False}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], 
+     ItemBox["\<\"Suspekt mejl    \"\>",
+      Frame->{{True, True}, {True, True}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], "\[SpanFromLeft]", 
+     ItemBox["\<\"Icke-suspekt mejl\"\>",
+      Frame->{{True, True}, {True, True}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], "\[SpanFromLeft]"},
+    {
+     ItemBox[
+      RotationBox["\<\"kategori   \"\>",
+       BoxRotation->1.5707963267948966`],
+      Frame->{{True, True}, {False, True}},
+      StripOnInput->False], 
+     ItemBox["\<\"Suspekt\\nmejl\"\>",
+      Frame->{{True, True}, {False, True}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], "\<\"Sann-positiv\"\>", 
+     "\[SpanFromLeft]", "\<\"Falsk-positiv\"\>", "\[SpanFromLeft]"},
+    {
+     ItemBox[
+      RotationBox["\<\"F\[ODoubleDot]rutsp\[ARing]dd\"\>",
+       BoxRotation->1.5707963267948966`],
+      Frame->{{True, True}, {True, False}},
+      StripOnInput->False], 
+     ItemBox["\<\"Icke-suspekt\\nmejl\"\>",
+      Frame->{{True, True}, {True, True}},
+      FrameStyle->Thickness[Large],
+      StripOnInput->False], "\<\"Falsk-negativ\"\>", 
+     "\[SpanFromLeft]", "\<\"Sann-negativ\"\>", "\[SpanFromLeft]"}
+   },
+   AutoDelete->False,
+   FrameStyle->Directive[
+     Thickness[Large], 
+     GrayLevel[0]],
+   GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.892942176195406*^9, 3.892942193933041*^9}},
+ CellLabel->"Out[8]=",ExpressionUUID->"15d5b609-94c6-4cfa-ac78-ea33911f8e42"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Kategorisering, angett i procent(%)\>\"", ",", " ", 
+       "SpanFromLeft"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Kategorisering\>\"", ",", "\"\<Sann-positiv\>\"", ",", 
+       "\"\<Sann-negativ\>\"", ",", "\"\<Falsk-positiv\>\"", ",", 
+       "\"\<Falsk-negativ\>\""}], "}"}], ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<GPT-3\>\"", ",", "\"\<20\>\"", ",", "\"\<72\>\"", ",", "\"\<0\>\"",
+        ",", "\"\<8\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<F\[ODoubleDot]rfattare\>\"", ",", "\"\<28\>\"", ",", "\"\<72\>\"", 
+       ",", "\"\<0\>\"", ",", "\"\<0\>\""}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<N=50\>\"", ",", " ", "SpanFromLeft"}], "}"}]}], "}"}], ",", 
+   RowBox[{"ItemSize", "->", " ", "10"}], ",", " ", 
+   RowBox[{"Frame", "->", " ", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.892942224306835*^9, 3.8929422496136293`*^9}, {
+  3.892942346020233*^9, 3.8929423485074167`*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"e2037d57-110d-417f-bf2f-7736f3694fda"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Kategorisering, angett i procent(%)\"\>", "\[SpanFromLeft]", 
+     "\[SpanFromLeft]", "\[SpanFromLeft]", "\[SpanFromLeft]"},
+    {"\<\"Kategorisering\"\>", "\<\"Sann-positiv\"\>", \
+"\<\"Sann-negativ\"\>", "\<\"Falsk-positiv\"\>", "\<\"Falsk-negativ\"\>"},
+    {"\<\"GPT-3\"\>", "\<\"20\"\>", "\<\"72\"\>", "\<\"0\"\>", "\<\"8\"\>"},
+    {"\<\"F\[ODoubleDot]rfattare\"\>", "\<\"28\"\>", "\<\"72\"\>", \
+"\<\"0\"\>", "\<\"0\"\>"},
+    {"\<\"N=50\"\>", "\[SpanFromLeft]", "\[SpanFromLeft]", "\[SpanFromLeft]", 
+     "\[SpanFromLeft]"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{10}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.892942350910026*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"15c992a0-abfc-4b35-881a-186e43a69630"]
+}, Open  ]]
+},
+WindowSize->{960, 552},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+Magnification:>0.9 Inherited,
+FrontEndVersion->"13.1 for Linux x86 (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"3d0cf3a9-ec22-460e-b4ef-0e6844899ddd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 149, 3, 46, "Input",ExpressionUUID->"12f1306f-387f-4ef2-9d47-36d69c2f4d80"],
+Cell[CellGroupData[{
+Cell[732, 27, 7854, 190, 726, "Input",ExpressionUUID->"9838887b-4f61-4a15-85eb-4f4141f67f76"],
+Cell[8589, 219, 1907, 33, 468, "Output",ExpressionUUID->"6b05c02c-f7ab-4d3b-a4ca-2702a7b67870"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10533, 257, 4495, 130, 433, "Input",ExpressionUUID->"c8989340-c021-4155-b3cb-3d0b9d5fb51e"],
+Cell[15031, 389, 1710, 30, 384, "Output",ExpressionUUID->"3808f7ec-ac5e-4a17-9f53-526ca4d1320b"]
+}, Open  ]],
+Cell[16756, 422, 1443, 23, 263, "Input",ExpressionUUID->"57f2662b-b296-411d-b084-7406cf3c960b"],
+Cell[CellGroupData[{
+Cell[18224, 449, 5815, 150, 349, "Input",ExpressionUUID->"38b77527-1073-408e-8a26-d50964188f28"],
+Cell[24042, 601, 2400, 64, 220, "Output",ExpressionUUID->"15d5b609-94c6-4cfa-ac78-ea33911f8e42"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26479, 670, 1242, 29, 114, "Input",ExpressionUUID->"e2037d57-110d-417f-bf2f-7736f3694fda"],
+Cell[27724, 701, 851, 17, 107, "Output",ExpressionUUID->"15c992a0-abfc-4b35-881a-186e43a69630"]
+}, Open  ]]
+}
+]
+*)
+
